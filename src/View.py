@@ -12,9 +12,10 @@ class View:
 		lbl_prefix = Gtk.Label(label="_Filtrar:", use_underline=True, mnemonic_widget=self.prefix)
 		prefix.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_prefix.get_accessible())
 
-		# Provisional, hay que implementar la carga inicial de info
+		# Provisional, hay que implementar la carga inicial de info en el Controlador no aquí
 		viewer = Gtk.ListStore(str, str, str, str)
-		viewer.append(["Manuel","Adolfo","Belen Esteban","Test Inicial"])
+		viewer.append(["Manuel","Adolfo","Test","Inicial"])
+		viewer.append(["Manuel","Adolfo","Test","Inicial"])
 		self.viewer = viewer
 		#
 
@@ -27,7 +28,7 @@ class View:
 		self.filter = filter
 		self.filter_prefix = ""
 
-		entries = Gtk.TreeView(filter, headers_visible=False)
+		entries = Gtk.TreeView(filter, headers_visible=True)
 
 		renderer0 = Gtk.CellRendererText()
 		column0 = Gtk.TreeViewColumn("DATE", renderer0, text=0)
