@@ -10,3 +10,5 @@ class Mock:
 		list.append(["Manuel","Adolfo","Test","Inicial"])
 		list.append(["Manuel","Adolfo","Test","Inicial"])
 		self.list = list
+	def addEntry(self, e):
+		print("")

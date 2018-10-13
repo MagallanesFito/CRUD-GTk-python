@@ -12,7 +12,6 @@ class View(Gtk.Window):
 		lbl_prefix = Gtk.Label(label="_Filtrar:", use_underline=True, mnemonic_widget=self.prefix)
 		prefix.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_prefix.get_accessible())'''
 
-		# Provisional, hay que implementar la carga inicial de info en el Controlador no aquí
 		Gtk.Window.__init__(self,title="Fitness App")
 		self.set_default_size(600,600)
 		self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
@@ -20,7 +19,7 @@ class View(Gtk.Window):
 
 		self.viewer = Gtk.ListStore(str, str, int, str)
 		#Actualizar con la informacion del modelo
-		self.viewer.append(["26/03/1974", "Rnning",  40,"Muy divertido"])
+		self.viewer.append(["26/03/1974", "Running",  40,"Muy divertido"])
 		self.viewer.append( ["16/02/1997", "Kick Boxing", 70,"Muy cansado!" ])
 		
 		grid = Gtk.Grid(margin=18)
@@ -76,7 +75,6 @@ class View(Gtk.Window):
 		#self.add.set_sensitive(True)
 		#self.modify.set_sensitive(False)
 		#self.remove.set_sensitive(False)		
-		self.show_all()
 
 	def _connect(self, vc):
 		self.connect("destroy",Gtk.main_quit)

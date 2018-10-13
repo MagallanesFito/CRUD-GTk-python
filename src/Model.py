@@ -9,7 +9,9 @@ class Model:
 	def __init__(self):
 		self.mock = Mock.Mock()
 	def addEntry(self, w):
-		DialogFullName(w,"Add",None).run()
+		entry = DialogFullName(w,"Add",None).run()
+		self.mock.addEntry(entry)
+		return entry
 	#def modifyEntry():
 	#def removeEntry():
 	#def getInformation():
@@ -59,7 +61,6 @@ class DialogFullName:
 		grid.attach(dur, 0, 3, 1, 1)
 		grid.attach(lbl_cm, 1, 2, 1, 1)
 		grid.attach(cm, 1, 3, 1, 1)
-		print("Hola")
 		box.pack_start(grid, True, True, 0)
 		box.show_all()
 

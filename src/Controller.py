@@ -15,7 +15,15 @@ class Controller:
 		Gtk.main()
 	
 	def onAddButtonClicked(self, w):
-		self.model.addEntry(self.view.win)
+		data = self.model.addEntry(self.view)
+		if data is None:
+			return
+
+		# hay que hacer un control de la fecha
+		(d,t,dur,com) = data
+		self.view.viewer.append([str(d),str(t),int(dur),str(com)])
+		print(str(com))
+
 
 	def onModifyButtonClicked(self, w):
 		print("Not implemented")
