@@ -12,5 +12,5 @@ if __name__ == '__main__':
     signal.signal(signal.SIGINT, signal.SIG_DFL)
 
     controller = Controller.Controller(View.View(),Model.Model())
-    Gtk.main()
+    controller.run_application()
 
