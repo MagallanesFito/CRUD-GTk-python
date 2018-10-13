@@ -12,7 +12,7 @@ class Controller:
 		view.connect(self)
 	
 	def onAddButtonClicked(self, w):
-		print("Not implemented")
+		self.model.addEntry(self.view.win)
 
 	def onModifyButtonClicked(self, w):
 		print("Not implemented")
