@@ -9,7 +9,10 @@ class Controller:
 	def __init__(self, view, model):
 		self.view = view
 		self.model = model
-		view.connect(self)
+		self.view._connect(self)
+	def run_application(self):
+		self.view.show_all()
+		Gtk.main()
 	
 	def onAddButtonClicked(self, w):
 		print("Not implemented")
