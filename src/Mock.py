@@ -6,9 +6,12 @@ from gi.repository import Gtk, Atk
 
 class Mock:
 	def __init__(self):
-		list = Gtk.ListStore(str,str,str,str)
-		list.append(["Manuel","Adolfo","Test","Inicial"])
-		list.append(["Manuel","Adolfo","Test","Inicial"])
-		self.list = list
+		'''list = Gtk.ListStore(str,str,int,str)
+		#Una dummy list, corregir después
+		list.append(["14/09/2019","Karate",60,"Agressive!"])
+		list.append(["13/10/2018","Tae Kwon Do",120,"Nice"])'''
+
+		#entradas dummy
+		self.list = [["14/09/2019","Karate",60,"Agressive!"],["13/10/2018","Tae Kwon Do",120,"Nice"]]
 	def addEntry(self, e):
-		print("")
+		self.list.append(list(e))

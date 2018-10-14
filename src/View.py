@@ -19,8 +19,8 @@ class View(Gtk.Window):
 
 		self.viewer = Gtk.ListStore(str, str, int, str)
 		#Actualizar con la informacion del modelo
-		self.viewer.append(["26/03/1974", "Running",  40,"Muy divertido"])
-		self.viewer.append( ["16/02/1997", "Kick Boxing", 70,"Muy cansado!" ])
+		#self.viewer.append(["26/03/1974", "Running",  40,"Muy divertido"])
+		#self.viewer.append( ["16/02/1997", "Kick Boxing", 70,"Muy cansado!" ])
 		
 		grid = Gtk.Grid(margin=18)
 		self.add(grid)
@@ -91,3 +91,6 @@ class View(Gtk.Window):
 
 	def _full(self, item):
 		return "{}, {}, {}, {}".format(*item)
+	def displayAllEntries(self,liststore):
+		for entry in liststore:
+			self.viewer.append(entry)

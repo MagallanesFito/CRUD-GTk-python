@@ -11,19 +11,13 @@ class Controller:
 		self.model = model
 		self.view._connect(self)
 	def run_application(self):
+		self.showAllEntries()
 		self.view.show_all()
 		Gtk.main()
 	
 	def onAddButtonClicked(self, w):
-		data = self.model.addEntry(self.view)
-		if data is None:
-			return
-
-		# hay que hacer un control de la fecha
-		(d,t,dur,com) = data
-		self.view.viewer.append([str(d),str(t),int(dur),str(com)])
-		print(str(com))
-
+		self.model.addEntry(self.view)
+		self.showAllEntries()
 
 	def onModifyButtonClicked(self, w):
 		print("Not implemented")
@@ -33,3 +27,7 @@ class Controller:
 
 	def onEntrySelectedChanged(self, selection):
 		print("Not implemented")
+	def showAllEntries(self):
+		#entries es una lista que se le pasa la vista
+		entries = self.model.getAllEntries()
+		self.view.displayAllEntries(entries)
