@@ -66,11 +66,19 @@ class DialogFullName:
 		return result
 
 	def _entry_changed(self, entry):
-		isFilled = (Model.Model().isValidDate(self.dat.get_text().strip())) and (self.dat.get_text().strip() != "") and (self.tp.get_text().strip() != "") and (self.dur.get_text().strip() != "") and (self.cm.get_text().strip() != "")
-		if not Model.Model().isValidDate(self.dat.get_text().strip()):
+		valid_duration = Model.Model().isValidDuration(self.dur.get_text().strip())
+		valid_date = Model.Model().isValidDate(self.dat.get_text().strip())
+
+		isFilled = (valid_duration) and (valid_date) and (self.dat.get_text().strip() != "") and (self.tp.get_text().strip() != "") and (self.dur.get_text().strip() != "") and (self.cm.get_text().strip() != "")
+		if not valid_date:
 			self.dat.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(1.0, 0.0, 0.0, 1.0))
 		else:
 			self.dat.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0.0, 0.0, 0.0, 1.0))
+
+		if not valid_duration:
+			self.dur.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(1.0, 0.0, 0.0, 1.0))
+		else:
+			self.dur.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0.0, 0.0, 0.0, 1.0))
 		
 		self.dialog.set_response_sensitive(Gtk.ResponseType.OK, isFilled)
 
