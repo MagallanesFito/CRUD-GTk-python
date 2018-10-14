@@ -17,7 +17,7 @@ class Controller:
 	
 	def onAddButtonClicked(self, w):
 		self.model.addEntry(self.view)
-		self.showAllEntries()
+		#self.showAllEntries()
 
 	def onModifyButtonClicked(self, w):
 		print("Not implemented")

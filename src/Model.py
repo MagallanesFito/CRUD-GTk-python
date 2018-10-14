@@ -14,10 +14,9 @@ class Model:
 		entry = generic_dialog.DialogFullName(w,"Add",None).run()
 
 		''' La validacion se hace en el modelo ''' 
-		result = self.validateDateTime(entry)
-
-		if result:
-			self.mock.addEntry(entry)
+		#result = self.validateDateTime(entry)
+		#if result:
+		self.mock.addEntry(entry)
 	def getAllEntries(self):
 		#es un objeto Gtk.ListStore
 		return self.mock.list
