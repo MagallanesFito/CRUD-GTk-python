@@ -19,13 +19,10 @@ class View(Gtk.Window):
 
 		self.viewer = Gtk.ListStore(str, str, int, str)
 		#Actualizar con la informacion del modelo
-<<<<<<< HEAD
-		self.viewer.append(["26/03/1974", "Rnning",40,"Muy divertido"])
-		self.viewer.append( ["16/02/1997", "Kick Boxing", 70,"Muy cansado!" ])
-=======
+
 		#self.viewer.append(["26/03/1974", "Running",  40,"Muy divertido"])
 		#self.viewer.append( ["16/02/1997", "Kick Boxing", 70,"Muy cansado!" ])
->>>>>>> new_feature
+
 		
 		grid = Gtk.Grid(margin=18)
 		self.add(grid)
