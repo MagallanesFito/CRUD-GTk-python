@@ -81,7 +81,7 @@ class View(Gtk.Window):
 		self.add.connect('clicked', vc.onAddButtonClicked)
 		self.modify.connect('clicked', vc.onModifyButtonClicked)
 		self.remove.connect('clicked', vc.onRemoveButtonClicked)
-		self.entries.get_selection().connect("changed", vc.onEntrySelectedChanged)
+		#self.entries.get_selection().connect("changed", vc.onEntrySelectedChanged)
 
 	def _entries_visible_func(self, model, iter, data):
 		if (self.filter_prefix == ""):

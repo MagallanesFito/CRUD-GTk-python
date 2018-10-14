@@ -25,10 +25,10 @@ class Controller:
 		print("Not implemented")
 
 	def onRemoveButtonClicked(self, w):
-		print("Not implemented")
-
+		selection = self.view.entries.get_selection()
+		self.model.removeEntry(self.view,selection)
 	def onEntrySelectedChanged(self, selection):
-		print("Not implemented")
+		print("Cambiado")
 	def showAllEntries(self):
 		#entries es una lista que se le pasa la vista
 		entries = self.model.getAllEntries()
