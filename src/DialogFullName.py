@@ -8,7 +8,7 @@ from gi.repository import Gtk, Atk, Gdk
 
 class DialogFullName:
 	def __init__(self, parent, title, data=None):
-		dialog = Gtk.Dialog(title, parent, Gtk.DialogFlags.DESTROY_WITH_PARENT, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK))
+		dialog = Gtk.Dialog(title, parent, Gtk.DialogFlags.DESTROY_WITH_PARENT, (Gtk.STOCK_OK, Gtk.ResponseType.OK,Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, ))
 		dialog.set_default_response(Gtk.ResponseType.OK)
 		dialog.set_response_sensitive(Gtk.ResponseType.OK, False)
 		self.dialog = dialog
@@ -16,16 +16,21 @@ class DialogFullName:
 		grid = Gtk.Grid(margin=20, column_spacing=10, row_spacing=10)
 
 		dat = Gtk.Entry(activates_default=True)
+		#dat.set_placeholder_text("DD/MM/YYYY")
+		dat.set_text("DD/MM/YYYY")
 		dat.connect('changed', self._entry_changed)
 		self.dat = dat
 		tp = Gtk.Entry(activates_default=True)
 		tp.connect('changed', self._entry_changed)
+		tp.set_placeholder_text('Type of exercise')
 		self.tp = tp
 		dur = Gtk.Entry(activates_default=True)
 		dur.connect('changed', self._entry_changed)
+		dur.set_placeholder_text('Only numeric values')
 		self.dur = dur
 		cm = Gtk.Entry(activates_default=True)
 		cm.connect('changed', self._entry_changed)
+		cm.set_placeholder_text('Write a short description :)')
 		self.cm = cm
 
 		if data is not None:
@@ -33,8 +38,7 @@ class DialogFullName:
 			tp.set_text(data[0])
 			dur.set_text(data[0])
 			cm.set_text(data[0])
-		self.date_title = "Date" + " " +"(DD/MM/YYYY)"
-		lbl_dat = Gtk.Label(self.date_title)
+		lbl_dat = Gtk.Label("Date")
 		dat.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_dat.get_accessible())
 		lbl_tp = Gtk.Label("Type")
 		tp.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_tp.get_accessible())
