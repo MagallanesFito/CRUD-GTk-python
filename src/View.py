@@ -17,8 +17,9 @@ class View(Gtk.Window):
 		self.set_default_size(600,600)
 		self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
 		self.set_icon_from_file('img/app_icon.ico')
-		
+
 		self.viewer = Gtk.ListStore(str, str, int, str)
+		#Actualizar con la informacion del modelo
 		self.viewer.append(["26/03/1974", "Rnning",  40,"Muy divertido"])
 		self.viewer.append( ["16/02/1997", "Kick Boxing", 70,"Muy cansado!" ])
 		
