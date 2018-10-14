@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 import gi
 import Mock
+import Model
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Atk
+from gi.repository import Gtk, Atk, Gdk
 
 class DialogFullName:
 	def __init__(self, parent, title, data=None):
@@ -32,8 +33,8 @@ class DialogFullName:
 			tp.set_text(data[0])
 			dur.set_text(data[0])
 			cm.set_text(data[0])
-
-		lbl_dat = Gtk.Label("Date")
+		self.date_title = "Date" + " " +"(DD/MM/YYYY)"
+		lbl_dat = Gtk.Label(self.date_title)
 		dat.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_dat.get_accessible())
 		lbl_tp = Gtk.Label("Type")
 		tp.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_tp.get_accessible())
@@ -55,6 +56,8 @@ class DialogFullName:
 
 	def run(self):
 		response = self.dialog.run()
+
+		''' Validacion con el modelo ''' 
 		if response == Gtk.ResponseType.OK:
 			result = (self.dat.get_text().strip(), self.tp.get_text().strip(), int(self.dur.get_text().strip()), self.cm.get_text().strip())
 		else:
@@ -63,6 +66,11 @@ class DialogFullName:
 		return result
 
 	def _entry_changed(self, entry):
-		isFilled = (self.dat.get_text().strip() != "") and (self.tp.get_text().strip() != "") and (self.dur.get_text().strip() != "") and (self.cm.get_text().strip() != "")
+		isFilled = (Model.Model().isValidDate(self.dat.get_text().strip())) and (self.dat.get_text().strip() != "") and (self.tp.get_text().strip() != "") and (self.dur.get_text().strip() != "") and (self.cm.get_text().strip() != "")
+		if not Model.Model().isValidDate(self.dat.get_text().strip()):
+			self.dat.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(1.0, 0.0, 0.0, 1.0))
+		else:
+			self.dat.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0.0, 0.0, 0.0, 1.0))
+		
 		self.dialog.set_response_sensitive(Gtk.ResponseType.OK, isFilled)
 
