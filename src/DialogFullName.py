@@ -37,7 +37,7 @@ class DialogFullName:
 		dat.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_dat.get_accessible())
 		lbl_tp = Gtk.Label("Type")
 		tp.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_tp.get_accessible())
-		lbl_dur = Gtk.Label("Duration")
+		lbl_dur = Gtk.Label("Duration (minutes)")
 		dur.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_dur.get_accessible())
 		lbl_cm = Gtk.Label("Comment")
 		cm.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_cm.get_accessible())
@@ -56,7 +56,7 @@ class DialogFullName:
 	def run(self):
 		response = self.dialog.run()
 		if response == Gtk.ResponseType.OK:
-			result = (self.dat.get_text().strip(), self.tp.get_text().strip(), self.dur.get_text().strip(), self.cm.get_text().strip())
+			result = (self.dat.get_text().strip(), self.tp.get_text().strip(), int(self.dur.get_text().strip()), self.cm.get_text().strip())
 		else:
 			result = None
 		self.dialog.destroy()

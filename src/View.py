@@ -91,6 +91,3 @@ class View(Gtk.Window):
 
 	def _full(self, item):
 		return "{}, {}, {}, {}".format(*item)
-	def displayAllEntries(self,liststore):
-		for entry in liststore:
-			self.viewer.append(entry)

@@ -12,24 +12,22 @@ class Model:
 		self.mock = Mock.Mock()
 	def addEntry(self, w):
 		entry = generic_dialog.DialogFullName(w,"Add",None).run()
-
-		''' La validacion se hace en el modelo ''' 
-		#result = self.validateDateTime(entry)
-		#if result:
-		self.mock.addEntry(entry)
+		''' Por lo pronto solo se hace la validacion de la fecha''' 
+		if entry is not None:
+			if(self.isValidDate(entry[0])):
+				self.mock.addEntry(list(entry))
+				return list(entry)
+		return None
 	def getAllEntries(self):
 		#es un objeto Gtk.ListStore
 		return self.mock.list
-	''' Por ahora solo se valida la fecha DD/MM/YYYY y la longitud del comentario < 50 caracteres''' 
-	def validateDateTime(self,data):
-		date_text = data[0] #Fecha 
-		comment_text = data[3]
+	''' Por ahora solo se valida la fecha DD/MM/YYYY''' 
+	def isValidDate(self,date):
 		valid = True
 		try:
-			datetime.datetime.strptime(date_text,'%d/%m/%Y')
+			datetime.datetime.strptime(date,'%d/%m/%Y')
+			#En la internacionalizacion hay que cambiar la expresion regular
 		except ValueError:
-			valid = False
-		if(len(comment_text) > 50):
 			valid = False
 		return valid
 	#def modifyEntry():

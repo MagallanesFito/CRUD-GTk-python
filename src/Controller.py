@@ -16,7 +16,9 @@ class Controller:
 		Gtk.main()
 	
 	def onAddButtonClicked(self, w):
-		self.model.addEntry(self.view)
+		entry = self.model.addEntry(self.view)
+		if entry is not None:
+			self.view.viewer.append(entry)
 		#self.showAllEntries()
 
 	def onModifyButtonClicked(self, w):
@@ -30,4 +32,5 @@ class Controller:
 	def showAllEntries(self):
 		#entries es una lista que se le pasa la vista
 		entries = self.model.getAllEntries()
-		self.view.displayAllEntries(entries)
+		for entry in entries:
+			self.view.viewer.append(entry)
