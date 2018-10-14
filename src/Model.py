@@ -37,7 +37,22 @@ class Model:
 			#No puede entrenar menos de 0 minutos ni mas de 100 horas
 			return integer_number > 0 and integer_number < 6000
 		return False
-	#def modifyEntry():
+	def modifyEntry(self,w,tree_selection):
+		(model_selection,pathlist) = tree_selection.get_selected_rows()
+		tree_iter = model_selection.get_iter(pathlist)
+		selected_entry = []
+		for i in range(4):
+			value = model_selection.get_value(tree_iter,i)
+			selected_entry.append(value)
+		print(selected_entry)
+		dialog = generic_dialog.DialogFullName(w,"Modify",selected_entry)
+		entry = dialog.run()
+		if entry is not None:
+			if(self.isValidDate(entry[0])):
+				self.mock.modifyEntry(selected_entry, list(entry))
+				return (tree_iter,list(entry))
+		return None
+		
 	def removeEntry(self,w,tree_selection):
 		(model_selection,pathlist) = tree_selection.get_selected_rows()
 		tree_iter = model_selection.get_iter(pathlist)

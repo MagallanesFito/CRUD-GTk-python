@@ -35,9 +35,9 @@ class DialogFullName:
 
 		if data is not None:
 			dat.set_text(data[0])
-			tp.set_text(data[0])
-			dur.set_text(data[0])
-			cm.set_text(data[0])
+			tp.set_text(data[1])
+			dur.set_text(str(data[2]))
+			cm.set_text(data[3])
 		lbl_dat = Gtk.Label("Date")
 		dat.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_dat.get_accessible())
 		lbl_tp = Gtk.Label("Type")
