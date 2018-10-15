@@ -17,3 +17,7 @@ class Mock:
 		self.list.append(list(e))
 	def deleteEntry(self,entry):
 		self.list.remove(entry)
+	def modifyEntry(self, befentry, aftentry):
+		a=self.list.index(befentry)
+		self.list.remove(befentry)
+		self.list.insert(a,aftentry)

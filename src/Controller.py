@@ -22,7 +22,12 @@ class Controller:
 		#self.showAllEntries()
 
 	def onModifyButtonClicked(self, w):
-		print("Not implemented")
+		selection = self.view.entries.get_selection()
+		entry = self.model.modifyEntry(self.view,selection)
+		if entry is not None:
+			(a,b) = entry
+			self.view.viewer.remove(a)
+			self.view.viewer.append(b)
 
 	def onRemoveButtonClicked(self, w):
 		selection = self.view.entries.get_selection()
