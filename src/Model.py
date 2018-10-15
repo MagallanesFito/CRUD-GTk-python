@@ -40,6 +40,7 @@ class Model:
 	#def modifyEntry():
 	def removeEntry(self,w,tree_selection):
 		(model_selection,pathlist) = tree_selection.get_selected_rows()
+		print(model_selection)
 		tree_iter = model_selection.get_iter(pathlist)
 		selected_entry = []
 		for i in range(4):
