@@ -80,6 +80,7 @@ class View(Gtk.Window):
 
 	def _connect(self, vc):
 		self.connect("destroy",Gtk.main_quit)
+		self.connect("key-press-event",vc.onKeyPressed)
 		self.add.connect('clicked', vc.onAddButtonClicked)
 		self.modify.connect('clicked', vc.onModifyButtonClicked)
 		self.remove.connect('clicked', vc.onRemoveButtonClicked)

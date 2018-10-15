@@ -30,8 +30,10 @@ class Controller:
 			self.view.viewer.append(b)
 
 	def onRemoveButtonClicked(self, w):
-		selection = self.view.entries.get_selection()
-		self.model.removeEntry(self.view,selection)
+		#No se puede borrar cuando no hay nada en el viewer de la vista
+		if len(self.view.viewer) > 0:
+			selection = self.view.entries.get_selection()
+			self.model.removeEntry(self.view,selection)
 	def onEntrySelectedChanged(self, selection):
 		print("Cambiado")
 	def showAllEntries(self):
@@ -39,3 +41,6 @@ class Controller:
 		entries = self.model.getAllEntries()
 		for entry in entries:
 			self.view.viewer.append(entry)
+	def onKeyPressed(self,widget,event):
+		if event.keyval == 65535:
+			self.onRemoveButtonClicked(widget)
