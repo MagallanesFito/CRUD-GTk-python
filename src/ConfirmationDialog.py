@@ -12,7 +12,7 @@ class ConfirmationDialog(Gtk.Dialog):
 
         self.set_default_size(150, 100)
 
-        label = Gtk.Label("Are you sure you want to delete this entry?")
+        label = Gtk.Label("Are you sure you want to delete this entry?",margin=18)
 
         box = self.get_content_area()
         box.add(label)
