@@ -11,7 +11,8 @@ class Controller:
 		self.model = model
 		self.view._connect(self)
 	def run_application(self):
-		self.showAllEntries()
+		#Por default se deja showAllEntries
+		self.onShowAllEntriesSelected(None)
 		self.view.show_all()
 		Gtk.main()
 	
@@ -45,19 +46,20 @@ class Controller:
 	desactiva. '''
 	def onMonthResumeClicked(self,w):
 		if self.view.month_resume.get_active():
-			print("Month resume clicked")
+			print("Month resume clicked, se borro todo el list store")
 	def onShowAllEntriesSelected(self,w):
+		'''Borra todo y muestra todo lo que está en el modelo. 
+		Mejorar la implementacion de esto. '''
 		if self.view.show_all_entries.get_active():
+			entries = self.model.getAllEntries()
+			self.view.viewer.clear()
+			for entry in entries:
+				self.view.viewer.append(entry)
 			print("show all entries selected")
 	def onFilterByDateSelected(self,w):
 		if self.view.filter_by_date.get_active():
 			print("filter by date selected")
 	#radio /
-	def showAllEntries(self):
-		#entries es una lista que se le pasa la vista
-		entries = self.model.getAllEntries()
-		for entry in entries:
-			self.view.viewer.append(entry)
 	def onKeyPressed(self,widget,event):
 		if event.keyval == 65535:
 			self.onRemoveButtonClicked(widget)
