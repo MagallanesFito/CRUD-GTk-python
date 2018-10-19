@@ -38,7 +38,7 @@ class Controller:
 	def onEntrySelectedChanged(self, selection):
 		print("Cambiado")
 	def onShowCalendarClicked(self,w):
-		calendario = Gtk.Widget().calendar_new()
+		self.model.showCalendar(self.view)
 		print("show calendar clicked")
 	'''La señal toggle de los radio buttons se activa tanto cuando
 	un boton se activa como cuando se desactiva. Se tiene que preguntar el

@@ -5,6 +5,7 @@ import Mock
 import DialogFullName as generic_dialog
 import datetime
 import ConfirmationDialog as delete_dialog
+import CalendarDialog as calendar
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Atk
 
@@ -70,6 +71,9 @@ class Model:
 		elif response == Gtk.ResponseType.CANCEL:
 			print("Deletion aborted")
 		dialog.destroy()
+	def showCalendar(self,view):
+		calendario = calendar.CalendarDialog(view)
+		a = calendario.run()
 
 	#def getInformation():
 
