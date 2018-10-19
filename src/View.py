@@ -76,13 +76,12 @@ class View(Gtk.Window):
 		label_filter = Gtk.Label('Filter:')
 		self.show_all_entries = Gtk.RadioButton.new_with_label(None,label = "Show all \nentries")
 		self.filter_by_date = Gtk.RadioButton.new_with_label_from_widget(self.show_all_entries,label = "Filter \nby date") 
-		
+		self.month_resume  = Gtk.RadioButton.new_with_label_from_widget(self.show_all_entries,label = "Monthly \n Resume")
+		#self.show_all_entries.set_active(True)
 		self.show_calendar = Gtk.ToolButton()	
-		#x-office-calendar
 		self.show_calendar.set_icon_name("x-office-calendar")
-		self.show_calendar.set_label("calendario")
 		#self.show_calendar = Gtk.Button('Show Calendar')
-		self.month_resume = Gtk.Button('Month resume') 
+		
 
 		''' Botones con iconos, a considerar
 		self.add = Gtk.ToolButton()
@@ -95,7 +94,6 @@ class View(Gtk.Window):
 		boxButtons.pack_start(self.add, False, False, 0)
 		boxButtons.pack_start(self.modify, False, False, 0)
 		boxButtons.pack_start(self.remove, False, False, 0)
-		boxButtons.pack_start(self.month_resume,False,False,0)
 		boxButtons.pack_start(self.show_calendar,False,False,0)
 
 		#filterBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL,spacing=12,margin=18)
@@ -103,6 +101,7 @@ class View(Gtk.Window):
 
 		filterButtons.pack_start(self.show_all_entries,False,False,0)
 		filterButtons.pack_start(self.filter_by_date,False,False,0)
+		filterButtons.pack_start(self.month_resume,False,False,0)
 		#grid.attach(boxFilter, 0, 0, 1, 1)
 		grid.attach(scrolled_window, 0, 1, 1, 1)
 		grid.attach(bottomBox, 0, 2, 3, 1)
@@ -118,7 +117,7 @@ class View(Gtk.Window):
 		self.modify.connect('clicked', vc.onModifyButtonClicked)
 		self.remove.connect('clicked', vc.onRemoveButtonClicked)
 		self.show_calendar.connect('clicked',vc.onShowCalendarClicked)
-		self.month_resume.connect('clicked',vc.onMonthResumeClicked)
+		self.month_resume.connect('toggled',vc.onMonthResumeClicked)
 		self.show_all_entries.connect('toggled',vc.onShowAllEntriesSelected)
 		self.filter_by_date.connect('toggled',vc.onFilterByDateSelected)
 		#self.entries.get_selection().connect("changed", vc.onEntrySelectedChanged)

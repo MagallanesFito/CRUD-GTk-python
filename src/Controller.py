@@ -38,12 +38,21 @@ class Controller:
 		print("Cambiado")
 	def onShowCalendarClicked(self,w):
 		print("show calendar clicked")
+	'''La señal toggle de los radio buttons se activa tanto cuando
+	un boton se activa como cuando se desactiva. Se tiene que preguntar el
+	estado del boton para poder realizar la accion, de otra forma cada funcion
+	del controlador se llamaría dos veces, una cuando se activa y otra cuando se 
+	desactiva. '''
 	def onMonthResumeClicked(self,w):
-		print("Month resume clicked")
+		if self.view.month_resume.get_active():
+			print("Month resume clicked")
 	def onShowAllEntriesSelected(self,w):
-		print("show all entries selected")
+		if self.view.show_all_entries.get_active():
+			print("show all entries selected")
 	def onFilterByDateSelected(self,w):
-		print("filter by date selected")
+		if self.view.filter_by_date.get_active():
+			print("filter by date selected")
+	#radio /
 	def showAllEntries(self):
 		#entries es una lista que se le pasa la vista
 		entries = self.model.getAllEntries()
