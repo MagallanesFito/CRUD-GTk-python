@@ -36,6 +36,14 @@ class Controller:
 			self.model.removeEntry(self.view,selection)
 	def onEntrySelectedChanged(self, selection):
 		print("Cambiado")
+	def onShowCalendarClicked(self,w):
+		print("show calendar clicked")
+	def onMonthResumeClicked(self,w):
+		print("Month resume clicked")
+	def onShowAllEntriesSelected(self,w):
+		print("show all entries selected")
+	def onFilterByDateSelected(self,w):
+		print("filter by date selected")
 	def showAllEntries(self):
 		#entries es una lista que se le pasa la vista
 		entries = self.model.getAllEntries()
