@@ -12,7 +12,7 @@ class Model:
 	def __init__(self):
 		self.mock = Mock.Mock()
 	def addEntry(self, w):
-		entry = generic_dialog.DialogFullName(w,"Add",None).run()
+		entry = generic_dialog.DialogFullName(w,"Add Entry",None).run()
 		''' Por lo pronto solo se hace la validacion de la fecha''' 
 		if entry is not None:
 			if(self.isValidDate(entry[0])):
@@ -45,7 +45,7 @@ class Model:
 			value = model_selection.get_value(tree_iter,i)
 			selected_entry.append(value)
 		print(selected_entry)
-		dialog = generic_dialog.DialogFullName(w,"Modify",selected_entry)
+		dialog = generic_dialog.DialogFullName(w,"Modify Entry",selected_entry)
 		entry = dialog.run()
 		if entry is not None:
 			if(self.isValidDate(entry[0])):
