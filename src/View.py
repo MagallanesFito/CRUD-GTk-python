@@ -3,14 +3,14 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk,Atk
 
 class View(Gtk.Window):
 	def __init__(self):
-		'''prefix = Gtk.Entry(width_chars=10)
+		prefix = Gtk.Entry(width_chars=10)
 		self.prefix = prefix
 		lbl_prefix = Gtk.Label(label="_Filtrar:", use_underline=True, mnemonic_widget=self.prefix)
-		prefix.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_prefix.get_accessible())'''
+		prefix.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_prefix.get_accessible())
 
 		Gtk.Window.__init__(self,title="Fitness App")
 		self.set_default_size(680,680)
@@ -18,25 +18,18 @@ class View(Gtk.Window):
 		self.set_icon_from_file('img/app_icon.ico')
 
 		self.viewer = Gtk.ListStore(str, str, int, str)
-		#Actualizar con la informacion del modelo
-
-		#self.viewer.append(["26/03/1974", "Running",  40,"Muy divertido"])
-		#self.viewer.append( ["16/02/1997", "Kick Boxing", 70,"Muy cansado!" ])
-
-		
 		grid = Gtk.Grid(margin=18)
 		self.add(grid)
-
 		self.add = Gtk.Button(label="_Add", use_underline=True)
 		self.remove = Gtk.Button(label="_Remove", use_underline=True)
 		self.modify = Gtk.Button(label="_Modify", use_underline=True)
 
-		'''filter = viewer.filter_new()
+		filter = self.viewer.filter_new()
 		filter.set_visible_func(self._entries_visible_func)
 		self.filter = filter
-		self.filter_prefix = ""'''
+		self.filter_prefix = ""
 
-		self.entries = Gtk.TreeView(self.viewer)
+		self.entries = Gtk.TreeView(filter, headers_visible=False)
 
 		renderer0 = Gtk.CellRendererText()
 		column0 = Gtk.TreeViewColumn("Date", renderer0, text=0)
@@ -75,7 +68,6 @@ class View(Gtk.Window):
 		''' Agregar el resto de botones en la version extendida'''
 		label_filter = Gtk.Label('Filter:')
 		self.show_all_entries = Gtk.RadioButton.new_with_label(None,label = "Show all \nentries")
-		self.filter_by_date = Gtk.RadioButton.new_with_label_from_widget(self.show_all_entries,label = "Filter \nby date") 
 		self.month_resume  = Gtk.RadioButton.new_with_label_from_widget(self.show_all_entries,label = "Monthly \n Resume")
 		#self.show_all_entries.set_active(True)
 		self.show_calendar = Gtk.ToolButton()	
@@ -90,22 +82,24 @@ class View(Gtk.Window):
 		self.modify.set_icon_name("accessories-text-editor")
 		self.remove = Gtk.ToolButton()
 		self.remove.set_icon_name("list-remove") '''
-
+		self.prefix.set_placeholder_text("DD/MM/YYYY")
 		boxButtons.pack_start(self.add, False, False, 0)
 		boxButtons.pack_start(self.modify, False, False, 0)
 		boxButtons.pack_start(self.remove, False, False, 0)
+		boxButtons.pack_start(Gtk.Label("Filtrar por día: "), False, False, 0)
+		boxButtons.pack_start(self.prefix, False, False, 0)
 		boxButtons.pack_start(self.show_calendar,False,False,0)
 
 		#filterBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL,spacing=12,margin=18)
 		filterButtons.pack_start(label_filter,False,False,0)
 
 		filterButtons.pack_start(self.show_all_entries,False,False,0)
-		filterButtons.pack_start(self.filter_by_date,False,False,0)
 		filterButtons.pack_start(self.month_resume,False,False,0)
 		#grid.attach(boxFilter, 0, 0, 1, 1)
 		grid.attach(scrolled_window, 0, 1, 1, 1)
 		grid.attach(bottomBox, 0, 2, 3, 1)
 
+		self.prefix.connect('changed', self.on_prefix_changed)
 		#self.add.set_sensitive(True)
 		#self.modify.set_sensitive(False)
 		#self.remove.set_sensitive(False)		
@@ -119,7 +113,6 @@ class View(Gtk.Window):
 		self.show_calendar.connect('clicked',vc.onShowCalendarClicked)
 		self.month_resume.connect('toggled',vc.onMonthResumeClicked)
 		self.show_all_entries.connect('toggled',vc.onShowAllEntriesSelected)
-		self.filter_by_date.connect('toggled',vc.onFilterByDateSelected)
 		#self.entries.get_selection().connect("changed", vc.onEntrySelectedChanged)
 
 	def _entries_visible_func(self, model, iter, data):
@@ -130,3 +123,7 @@ class View(Gtk.Window):
 
 	def _full(self, item):
 		return "{}, {}, {}, {}".format(*item)
+
+	def on_prefix_changed(self, entry):
+		self.filter_prefix = entry.get_text()
+		self.entries.get_model().refilter()       
