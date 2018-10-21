@@ -54,7 +54,7 @@ class Model:
 				return entry
 		return None
 		
-	def removeEntry(self,w,tree_selection):
+	def removeEntry(self,main_view,tree_selection):
 		(model_selection,pathlist) = tree_selection.get_selected_rows()
 		tree_iter = model_selection.get_iter(pathlist)
 		selected_entry = []
@@ -62,11 +62,14 @@ class Model:
 			value = model_selection.get_value(tree_iter,i)
 			selected_entry.append(value)
 
-		dialog = delete_dialog.ConfirmationDialog(w)
+		dialog = delete_dialog.ConfirmationDialog(main_view)
 		response = dialog.run()
 		if response == Gtk.ResponseType.OK:
 			self.mock.deleteEntry(selected_entry)
-			model_selection.remove(tree_iter)
+			#main_view.viewer.remove(tree_iter)
+			model, filteriter = tree_selection.get_selected()
+			treeiter = model.convert_iter_to_child_iter(filteriter)
+			model.get_model().remove(treeiter)
 			print("Deleted!")
 		elif response == Gtk.ResponseType.CANCEL:
 			print("Deletion aborted")

@@ -30,7 +30,7 @@ class Controller:
 		model, filteriter = self.view.entries.get_selection().get_selected()
 		treeiter = model.convert_iter_to_child_iter(filteriter)
 		model.get_model().set(treeiter, list(range(0,4)), [a,b,c,d])
-
+		
 	def onRemoveButtonClicked(self, w):
 		#No se puede borrar cuando no hay nada en el viewer de la vista
 		if len(self.view.viewer) > 0:
