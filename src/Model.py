@@ -51,7 +51,7 @@ class Model:
 		if entry is not None:
 			if(self.isValidDate(entry[0])):
 				self.mock.modifyEntry(selected_entry, list(entry))
-				return (tree_iter,list(entry))
+				return entry
 		return None
 		
 	def removeEntry(self,w,tree_selection):
