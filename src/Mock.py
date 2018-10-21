@@ -19,5 +19,5 @@ class Mock:
 		self.list.remove(entry)
 	def modifyEntry(self, befentry, aftentry):
 		a=self.list.index(befentry)
-		self.list.remove(befentry)
-		self.list.insert(a,aftentry)
+		self.list.remove(befentry) # deletes the old element
+		self.list.insert(a,aftentry) # insert the new element in old element position

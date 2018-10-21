@@ -29,7 +29,7 @@ class View(Gtk.Window):
 		self.filter = filter
 		self.filter_prefix = ""
 
-		self.entries = Gtk.TreeView(filter, headers_visible=False)
+		self.entries = Gtk.TreeView(filter, headers_visible=True)
 
 		renderer0 = Gtk.CellRendererText()
 		column0 = Gtk.TreeViewColumn("Date", renderer0, text=0)
