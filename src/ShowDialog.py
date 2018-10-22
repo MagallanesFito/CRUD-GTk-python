@@ -13,7 +13,7 @@ class ShowDialog:
 		self.dialog = dialog
 		box = dialog.get_content_area()
 		grid = Gtk.Grid(margin=18, column_spacing=12, row_spacing=12)
-		label = Gtk.Label("Total minutes: " + str(minutes))
+		label = Gtk.Label(str(minutes) + " minutes wasted in activities")
 		grid.attach(label, 1, 3, 1, 1)
 		box.pack_start(grid, True, True, 0)
 		box.show_all()
