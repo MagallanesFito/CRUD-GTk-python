@@ -99,3 +99,15 @@ class Model:
 		if entry is None:
 			return
 		return entry
+
+	def showResume(self, parent, minutes):
+		dialog = Gtk.Dialog("Resumen mensual", parent, Gtk.DialogFlags.DESTROY_WITH_PARENT, (Gtk.STOCK_OK, Gtk.ResponseType.OK, ))
+		dialog.set_default_response(Gtk.ResponseType.OK)
+		dialog.set_default_size(200,30)
+		box = dialog.get_content_area()
+		grid = Gtk.Grid(margin=18, column_spacing=12, row_spacing=12)
+		label = Gtk.Label("Total minutes: " + str(minutes))
+		grid.attach(label, 1, 3, 1, 1)
+		box.pack_start(grid, True, True, 0)
+		box.show_all()
+		dialog.run()

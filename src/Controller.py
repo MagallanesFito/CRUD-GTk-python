@@ -56,7 +56,7 @@ class Controller:
 		#	(a,b,c,d) = fila
 		#	if fila encaja con month y year
 		#		total_min = total_min + c
-		#self.model.mostrar(total_min)
+		self.model.showResume(self.view, total_min)
 		
 	def onShowAllEntriesSelected(self,w):
 		'''Borra todo y muestra todo lo que está en el modelo. 
