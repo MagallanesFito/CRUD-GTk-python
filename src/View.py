@@ -70,8 +70,8 @@ class View(Gtk.Window):
 		self.show_all_entries = Gtk.Button("Show all")
 		self.month_resume  = Gtk.Button("Month resume")
 		#self.show_all_entries.set_active(True)
-		self.show_calendar = Gtk.ToolButton()	
-		self.show_calendar.set_icon_name("x-office-calendar")
+		#self.show_calendar = Gtk.ToolButton()	
+		#self.show_calendar.set_icon_name("x-office-calendar")
 		#self.show_calendar = Gtk.Button('Show Calendar')
 		
 
@@ -90,7 +90,7 @@ class View(Gtk.Window):
 		boxButtons.pack_start(self.show_all_entries,False,False,0)
 		boxButtons.pack_start(Gtk.Label("Filter by day: "), False, False, 0)
 		boxButtons.pack_start(self.prefix, False, False, 0)
-		boxButtons.pack_start(self.show_calendar,False,False,0)
+		#boxButtons.pack_start(self.show_calendar,False,False,0)
 
 		#filterBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL,spacing=12,margin=18)
 		#filterButtons.pack_start(label_filter,False,False,0)
@@ -111,7 +111,7 @@ class View(Gtk.Window):
 		self.add.connect('clicked', vc.onAddButtonClicked)
 		self.modify.connect('clicked', vc.onModifyButtonClicked)
 		self.remove.connect('clicked', vc.onRemoveButtonClicked)
-		self.show_calendar.connect('clicked',vc.onShowCalendarClicked)
+		#self.show_calendar.connect('clicked',vc.onShowCalendarClicked)
 		self.month_resume.connect('clicked',vc.onMonthResumeClicked)
 		self.show_all_entries.connect('clicked',vc.onShowAllEntriesSelected)
 		#self.entries.get_selection().connect("changed", vc.onEntrySelectedChanged)

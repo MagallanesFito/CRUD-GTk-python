@@ -16,3 +16,5 @@ class Mock:
 		a=self.list.index(befentry)
 		self.list.remove(befentry) # deletes the old element
 		self.list.insert(a,aftentry) # insert the new element in old element position
+	def get_all(self):
+		return self.list

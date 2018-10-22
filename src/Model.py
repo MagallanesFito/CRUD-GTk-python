@@ -24,7 +24,7 @@ class Model:
 		return None
 	def getAllEntries(self):
 		#es un objeto Gtk.ListStore
-		return self.mock.list
+		return self.mock.get_all()
 	''' Por ahora solo se valida la fecha DD/MM/YYYY''' 
 	def isValidDate(self,date):
 		valid = True
@@ -92,7 +92,7 @@ class Model:
 			print("Deletion aborted")
 		dialog.destroy()
 	def showCalendar(self,view):
-		calendario = calendar.CalendarDialog(view)
+		calendario = calendar.CalendarDialog(view,self.mock.get_all())
 		a = calendario.run()
 
 	def getDate(self,w):
