@@ -56,12 +56,12 @@ class Controller:
 	def onShowAllEntriesSelected(self,w):
 		'''Borra todo y muestra todo lo que está en el modelo. 
 		Mejorar la implementacion de esto. '''
-		if self.view.show_all_entries.get_active():
-			entries = self.model.getAllEntries()
-			self.view.viewer.clear()
-			for entry in entries:
-				self.view.viewer.append(entry)
-			print("show all entries selected")
+		#if self.view.show_all_entries.get_active():
+		entries = self.model.getAllEntries()
+		self.view.viewer.clear()
+		for entry in entries:
+			self.view.viewer.append(entry)
+		print("show all entries selected")
 	def onFilterByDateSelected(self,w):
 		if self.view.filter_by_date.get_active():
 			print("filter by date selected")
