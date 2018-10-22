@@ -103,3 +103,14 @@ class Model:
 
 	def showResume(self, parent, minutes):
 		ShowDialog.ShowDialog(parent, minutes).run()
+	
+	def MonthResume(self, parent, month, year):
+		entries = self.getAllEntries()
+		total_min = 0
+		for entry in entries: # detecta las actividades en el mes seleccionado
+			(date, a, b, c) = entry
+			#datetime.datetime.strptime(date,'%d/%m/%Y')
+			#(aday, amonth, ayear) = date
+			#if amonth==month and ayear==year:
+			#	total_min = total_min + b
+		self.showResume(parent, total_min)

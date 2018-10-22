@@ -47,16 +47,11 @@ class Controller:
 	del controlador se llamaría dos veces, una cuando se activa y otra cuando se 
 	desactiva. '''
 	def onMonthResumeClicked(self,w):
-		entry = self.model.getDate(self.view)
+		entry = self.model.getDate(self.view) # obtiene el mes (mes y año) a resumir
 		if entry is None:
 			return
 		(month,year) = entry
-		total_min = 0
-		#for ... :
-		#	(a,b,c,d) = fila
-		#	if fila encaja con month y year
-		#		total_min = total_min + c
-		self.model.showResume(self.view, total_min)
+		self.model.MonthResume(self.view, month, year)
 		
 	def onShowAllEntriesSelected(self,w):
 		'''Borra todo y muestra todo lo que está en el modelo. 
