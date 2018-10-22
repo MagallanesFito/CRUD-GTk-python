@@ -50,8 +50,8 @@ class Controller:
 		entry = self.model.getDate(self.view)
 		if entry is None:
 			return
-		#(month,year) = entry
-		#total_min = 0
+		(month,year) = entry
+		total_min = 0
 		#for ... :
 		#	(a,b,c,d) = fila
 		#	if fila encaja con month y year
