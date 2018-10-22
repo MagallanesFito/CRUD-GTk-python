@@ -109,8 +109,7 @@ class Model:
 		total_min = 0
 		for entry in entries: # detecta las actividades en el mes seleccionado
 			(date, a, b, c) = entry
-			#datetime.datetime.strptime(date,'%d/%m/%Y')
-			#(aday, amonth, ayear) = date
-			#if amonth==month and ayear==year:
-			#	total_min = total_min + b
+			adate = datetime.datetime.strptime(date,'%d/%m/%Y')
+			if adate.month ==month and adate.year==year:
+				total_min = total_min + b
 		self.showResume(parent, total_min)
