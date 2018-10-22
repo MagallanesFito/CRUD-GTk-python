@@ -6,6 +6,7 @@ import DialogFullName as generic_dialog
 import datetime
 import ConfirmationDialog as delete_dialog
 import CalendarDialog as calendar
+import MonthlyResumeDialog
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Atk
 
@@ -32,12 +33,27 @@ class Model:
 		except ValueError:
 			valid = False
 		return valid
+		
 	def isValidDuration(self,number):
 		if number.isnumeric():
 			integer_number = int(number)
 			#No puede entrenar menos de 0 minutos ni mas de 100 horas
 			return integer_number > 0 and integer_number < 6000
 		return False
+		
+	def isValidMonth(self,month):
+		if month.isnumeric():
+			integer_number = int(month)
+			return integer_number > 0 and integer_number < 13
+		return False
+		
+	def isValidYear(self,year):
+		if year.isnumeric():
+			integer_number = int(year)
+			#Numeros positivos de maximo 4 cifras
+			return integer_number > 0 and integer_number < 9999
+		return False
+		
 	def modifyEntry(self,w,tree_selection):
 		(model_selection,pathlist) = tree_selection.get_selected_rows()
 		tree_iter = model_selection.get_iter(pathlist)
@@ -78,5 +94,8 @@ class Model:
 		calendario = calendar.CalendarDialog(view)
 		a = calendario.run()
 
-	#def getInformation():
-
+	def getDate(self,w):
+		entry = MonthlyResumeDialog.MonthlyResumeDialog(w).run()
+		if entry is None:
+			return
+		return entry

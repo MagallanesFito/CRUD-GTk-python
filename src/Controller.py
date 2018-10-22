@@ -47,8 +47,17 @@ class Controller:
 	del controlador se llamaría dos veces, una cuando se activa y otra cuando se 
 	desactiva. '''
 	def onMonthResumeClicked(self,w):
-		if self.view.month_resume.get_active():
-			print("Month resume clicked, se borro todo el list store")
+		entry = self.model.getDate(self.view)
+		if entry is None:
+			return
+		#(month,year) = entry
+		#total_min = 0
+		#for ... :
+		#	(a,b,c,d) = fila
+		#	if fila encaja con month y year
+		#		total_min = total_min + c
+		#self.model.mostrar(total_min)
+		
 	def onShowAllEntriesSelected(self,w):
 		'''Borra todo y muestra todo lo que está en el modelo. 
 		Mejorar la implementacion de esto. '''

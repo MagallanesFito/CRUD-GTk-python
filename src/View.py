@@ -68,7 +68,7 @@ class View(Gtk.Window):
 		''' Agregar el resto de botones en la version extendida'''
 		label_filter = Gtk.Label('Filter:')
 		self.show_all_entries = Gtk.RadioButton.new_with_label(None,label = "Show all \nentries")
-		self.month_resume  = Gtk.RadioButton.new_with_label_from_widget(self.show_all_entries,label = "Monthly \n Resume")
+		self.month_resume  = Gtk.Button("Month resume")
 		#self.show_all_entries.set_active(True)
 		self.show_calendar = Gtk.ToolButton()	
 		self.show_calendar.set_icon_name("x-office-calendar")
@@ -86,7 +86,8 @@ class View(Gtk.Window):
 		boxButtons.pack_start(self.add, False, False, 0)
 		boxButtons.pack_start(self.modify, False, False, 0)
 		boxButtons.pack_start(self.remove, False, False, 0)
-		boxButtons.pack_start(Gtk.Label("Filtrar por día: "), False, False, 0)
+		boxButtons.pack_start(self.month_resume, False, False, 0)
+		boxButtons.pack_start(Gtk.Label("Filter by day: "), False, False, 0)
 		boxButtons.pack_start(self.prefix, False, False, 0)
 		boxButtons.pack_start(self.show_calendar,False,False,0)
 
@@ -94,7 +95,6 @@ class View(Gtk.Window):
 		filterButtons.pack_start(label_filter,False,False,0)
 
 		filterButtons.pack_start(self.show_all_entries,False,False,0)
-		filterButtons.pack_start(self.month_resume,False,False,0)
 		#grid.attach(boxFilter, 0, 0, 1, 1)
 		grid.attach(scrolled_window, 0, 1, 1, 1)
 		grid.attach(bottomBox, 0, 2, 3, 1)
@@ -111,7 +111,7 @@ class View(Gtk.Window):
 		self.modify.connect('clicked', vc.onModifyButtonClicked)
 		self.remove.connect('clicked', vc.onRemoveButtonClicked)
 		self.show_calendar.connect('clicked',vc.onShowCalendarClicked)
-		self.month_resume.connect('toggled',vc.onMonthResumeClicked)
+		self.month_resume.connect('clicked',vc.onMonthResumeClicked)
 		self.show_all_entries.connect('toggled',vc.onShowAllEntriesSelected)
 		#self.entries.get_selection().connect("changed", vc.onEntrySelectedChanged)
 
