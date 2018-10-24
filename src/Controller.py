@@ -36,8 +36,7 @@ class Controller:
 		if len(self.view.viewer) > 0:
 			selection = self.view.entries.get_selection()
 			self.model.removeEntry(self.view,selection)
-	def onEntrySelectedChanged(self, selection):
-		print("Cambiado")
+			
 	def onShowCalendarClicked(self,w):
 		self.model.showCalendar(self.view)
 		print("show calendar clicked")
@@ -51,7 +50,7 @@ class Controller:
 		if entry is None:
 			return
 		(month,year) = entry
-		self.model.MonthResume(self.view, month, year)
+		self.model.monthResume(self.view, month, year)
 		
 	def onShowAllEntriesSelected(self,w):
 		'''Borra todo y muestra todo lo que está en el modelo. 
@@ -62,10 +61,7 @@ class Controller:
 		for entry in entries:
 			self.view.viewer.append(entry)
 		print("show all entries selected")
-	def onFilterByDateSelected(self,w):
-		if self.view.filter_by_date.get_active():
-			print("filter by date selected")
-	#radio /
+
 	def onKeyPressed(self,widget,event):
 		if event.keyval == 65535:
 			self.onRemoveButtonClicked(widget)
