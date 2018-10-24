@@ -56,7 +56,7 @@ class View(Gtk.Window):
 		bottomBox.pack_start(boxButtons,False,False,0)
 		bottomBox.pack_start(filterButtons,False,False,0)
 
-		self.show_all_entries = Gtk.Button("Show all")
+		self.show_all_entries = Gtk.Button("Show all entries")
 		self.month_resume  = Gtk.Button("Monthly resume")
 		self.prefix.set_placeholder_text("DD/MM/YYYY")
 		boxButtons.pack_start(self.add, False, False, 0)

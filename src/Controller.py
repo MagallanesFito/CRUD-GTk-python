@@ -57,6 +57,7 @@ class Controller:
 		Mejorar la implementacion de esto. '''
 		#if self.view.show_all_entries.get_active():
 		entries = self.model.getAllEntries()
+		self.view.prefix.set_text("")
 		self.view.viewer.clear()
 		for entry in entries:
 			self.view.viewer.append(entry)
