@@ -73,6 +73,8 @@ class Model:
 		
 	def removeEntry(self,main_view,tree_selection):
 		(model_selection,pathlist) = tree_selection.get_selected_rows()
+		if pathlist == []:
+			return 
 		tree_iter = model_selection.get_iter(pathlist)
 		selected_entry = []
 		for i in range(4):
