@@ -10,6 +10,7 @@ class Controller:
 		self.view = view
 		self.model = model
 		self.view._connect(self)
+		self.isFiltered = False
 	def run_application(self):
 		#Por default se deja showAllEntries
 		self.onShowAllEntriesSelected(None)
@@ -18,7 +19,7 @@ class Controller:
 	
 	def onAddButtonClicked(self, w):
 		entry = self.model.addEntry(self.view)
-		if entry is not None:
+		if entry is not None and self.isFiltered == False:
 			self.view.viewer.append(entry)
 		#self.showAllEntries()
 
@@ -59,8 +60,10 @@ class Controller:
 		#if self.view.show_all_entries.get_active():
 		if data == None:
 			entries = self.model.getAllEntries()
+			self.isFiltered = False
 		else:
 			entries = data
+			self.isFiltered = True
 		self.view.prefix.set_text("")
 		self.view.viewer.clear()
 		for entry in entries:
