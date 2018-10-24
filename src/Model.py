@@ -95,8 +95,8 @@ class Model:
 		calendario = calendar.CalendarDialog(view,self.mock.get_all())
 		a = calendario.run()
 
-	def getDate(self,w):
-		entry = MonthlyResumeDialog.MonthlyResumeDialog(w).run()
+	def getDate(self,view):
+		entry = MonthlyResumeDialog.MonthlyResumeDialog(view).run()
 		if entry is None:
 			return
 		return entry
@@ -104,7 +104,7 @@ class Model:
 	def showResume(self, parent, minutes):
 		ShowDialog.ShowDialog(parent, minutes).run()
 	
-	def MonthResume(self, parent, month, year):
+	def monthResume(self, parent, month, year):
 		entries = self.getAllEntries()
 		total_min = 0
 		for entry in entries: # detecta las actividades en el mes seleccionado

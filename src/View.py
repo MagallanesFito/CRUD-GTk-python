@@ -11,12 +11,10 @@ class View(Gtk.Window):
 		self.prefix = prefix
 		lbl_prefix = Gtk.Label(label="_Filtrar:", use_underline=True, mnemonic_widget=self.prefix)
 		prefix.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_prefix.get_accessible())
-
 		Gtk.Window.__init__(self,title="Fitness App")
 		self.set_default_size(680,680)
 		self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
 		self.set_icon_from_file('img/app_icon.ico')
-
 		self.viewer = Gtk.ListStore(str, str, int, str)
 		grid = Gtk.Grid(margin=18)
 		self.add(grid)
@@ -28,7 +26,6 @@ class View(Gtk.Window):
 		filter.set_visible_func(self._entries_visible_func)
 		self.filter = filter
 		self.filter_prefix = ""
-
 		self.entries = Gtk.TreeView(filter, headers_visible=True)
 
 		renderer0 = Gtk.CellRendererText()
@@ -50,14 +47,8 @@ class View(Gtk.Window):
 		self.entries.append_column(column3)
 
 		scrolled_window = Gtk.ScrolledWindow(expand=True)
-		#scrolled_window.set_size_request(200, 500)
 		scrolled_window.add(self.entries)
 
-		#En la siguiente version de la vista se implementa el filtrado
-
-		'''boxFilter = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10, margin=0)
-		boxFilter.pack_start(lbl_prefix, False, False, 0)
-		boxFilter.pack_start(self.prefix, False, False, 0)'''
 		bottomBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=18, margin_top=18)
 		boxButtons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
 		filterButtons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6,margin_right=0) 
@@ -65,23 +56,8 @@ class View(Gtk.Window):
 		bottomBox.pack_start(boxButtons,False,False,0)
 		bottomBox.pack_start(filterButtons,False,False,0)
 
-		''' Agregar el resto de botones en la version extendida'''
-		#label_filter = Gtk.Label('Filter:')
 		self.show_all_entries = Gtk.Button("Show all")
 		self.month_resume  = Gtk.Button("Month resume")
-		#self.show_all_entries.set_active(True)
-		#self.show_calendar = Gtk.ToolButton()	
-		#self.show_calendar.set_icon_name("x-office-calendar")
-		#self.show_calendar = Gtk.Button('Show Calendar')
-		
-
-		''' Botones con iconos, a considerar
-		self.add = Gtk.ToolButton()
-		self.add.set_icon_name("list-add")
-		self.modify = Gtk.ToolButton()
-		self.modify.set_icon_name("accessories-text-editor")
-		self.remove = Gtk.ToolButton()
-		self.remove.set_icon_name("list-remove") '''
 		self.prefix.set_placeholder_text("DD/MM/YYYY")
 		boxButtons.pack_start(self.add, False, False, 0)
 		boxButtons.pack_start(self.modify, False, False, 0)
@@ -90,20 +66,10 @@ class View(Gtk.Window):
 		boxButtons.pack_start(self.show_all_entries,False,False,0)
 		boxButtons.pack_start(Gtk.Label("Filter by day: "), False, False, 0)
 		boxButtons.pack_start(self.prefix, False, False, 0)
-		#boxButtons.pack_start(self.show_calendar,False,False,0)
 
-		#filterBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL,spacing=12,margin=18)
-		#filterButtons.pack_start(label_filter,False,False,0)
-
-		#filterButtons.pack_start(self.show_all_entries,False,False,0)
-		#grid.attach(boxFilter, 0, 0, 1, 1)
 		grid.attach(scrolled_window, 0, 1, 1, 1)
 		grid.attach(bottomBox, 0, 2, 3, 1)
-
 		self.prefix.connect('changed', self.on_prefix_changed)
-		#self.add.set_sensitive(True)
-		#self.modify.set_sensitive(False)
-		#self.remove.set_sensitive(False)		
 
 	def _connect(self, vc):
 		self.connect("destroy",Gtk.main_quit)
@@ -114,7 +80,6 @@ class View(Gtk.Window):
 		#self.show_calendar.connect('clicked',vc.onShowCalendarClicked)
 		self.month_resume.connect('clicked',vc.onMonthResumeClicked)
 		self.show_all_entries.connect('clicked',vc.onShowAllEntriesSelected)
-		#self.entries.get_selection().connect("changed", vc.onEntrySelectedChanged)
 
 	def _entries_visible_func(self, model, iter, data):
 		if (self.filter_prefix == ""):
