@@ -108,10 +108,13 @@ class Model:
 	
 	def monthResume(self, parent, month, year):
 		entries = self.getAllEntries()
+		entries_shown = []
 		total_min = 0
 		for entry in entries: # detecta las actividades en el mes seleccionado
 			(date, a, b, c) = entry
 			adate = datetime.datetime.strptime(date,'%d/%m/%Y')
 			if adate.month ==month and adate.year==year:
+				entries_shown.append([date,a,b,c])
 				total_min = total_min + b
 		self.showResume(parent, total_min)
+		return entries_shown

@@ -50,13 +50,17 @@ class Controller:
 		if entry is None:
 			return
 		(month,year) = entry
-		self.model.monthResume(self.view, month, year)
+		selected_entries = self.model.monthResume(self.view, month, year)
+		self.onShowAllEntriesSelected(w,selected_entries)
 		
-	def onShowAllEntriesSelected(self,w):
+	def onShowAllEntriesSelected(self,w,data=None):
 		'''Borra todo y muestra todo lo que está en el modelo. 
 		Mejorar la implementacion de esto. '''
 		#if self.view.show_all_entries.get_active():
-		entries = self.model.getAllEntries()
+		if data == None:
+			entries = self.model.getAllEntries()
+		else:
+			entries = data
 		self.view.prefix.set_text("")
 		self.view.viewer.clear()
 		for entry in entries:
