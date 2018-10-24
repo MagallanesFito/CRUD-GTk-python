@@ -7,7 +7,7 @@ from gi.repository import Gtk,Atk
 
 class View(Gtk.Window):
 	def __init__(self):
-		prefix = Gtk.Entry(width_chars=10)
+		prefix = Gtk.Entry()
 		self.prefix = prefix
 		lbl_prefix = Gtk.Label(label="_Filtrar:", use_underline=True, mnemonic_widget=self.prefix)
 		prefix.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_prefix.get_accessible())
@@ -20,7 +20,7 @@ class View(Gtk.Window):
 		self.add(grid)
 		self.add = Gtk.Button(label="_Add", use_underline=True)
 		self.remove = Gtk.Button(label="_Remove", use_underline=True)
-		self.modify = Gtk.Button(label="_Modify", use_underline=True)
+		self.modify = Gtk.Button(label="_Edit", use_underline=True)
 
 		filter = self.viewer.filter_new()
 		filter.set_visible_func(self._entries_visible_func)
@@ -57,7 +57,7 @@ class View(Gtk.Window):
 		bottomBox.pack_start(filterButtons,False,False,0)
 
 		self.show_all_entries = Gtk.Button("Show all")
-		self.month_resume  = Gtk.Button("Month resume")
+		self.month_resume  = Gtk.Button("Monthly resume")
 		self.prefix.set_placeholder_text("DD/MM/YYYY")
 		boxButtons.pack_start(self.add, False, False, 0)
 		boxButtons.pack_start(self.modify, False, False, 0)
@@ -89,7 +89,7 @@ class View(Gtk.Window):
 
 	def _full(self, item):
 		return "{}, {}, {}, {}".format(*item)
-
+	''' Mandar esta funcion al controlador''' 
 	def on_prefix_changed(self, entry):
 		self.filter_prefix = entry.get_text()
 		self.entries.get_model().refilter()       

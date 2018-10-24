@@ -101,15 +101,35 @@ class Model:
 			return
 		return entry
 
-	def showResume(self, parent, minutes):
-		ShowDialog.ShowDialog(parent, minutes).run()
-	
 	def monthResume(self, parent, month, year):
 		entries = self.getAllEntries()
 		total_min = 0
+		month_list = Gtk.ListStore(str, str, int, str)
 		for entry in entries: # detecta las actividades en el mes seleccionado
 			(date, a, b, c) = entry
 			adate = datetime.datetime.strptime(date,'%d/%m/%Y')
 			if adate.month ==month and adate.year==year:
 				total_min = total_min + b
-		self.showResume(parent, total_min)
+				month_list.append(entry)
+		tree = Gtk.TreeView(month_list, headers_visible=True)
+		
+		renderer0 = Gtk.CellRendererText()
+		column0 = Gtk.TreeViewColumn("Date", renderer0, text=0)
+		column0.set_alignment(0.5)
+		renderer1 = Gtk.CellRendererText()
+		column1 = Gtk.TreeViewColumn("Type", renderer1, text=1)
+		column1.set_alignment(0.5)
+		renderer2 = Gtk.CellRendererText()
+		column2 = Gtk.TreeViewColumn("Duration (minutes)", renderer2, text=2)
+		column2.set_alignment(0.5)
+		renderer3 = Gtk.CellRendererText()
+		column3 = Gtk.TreeViewColumn("Comment", renderer3, text=3)
+		column3.set_alignment(0.5)
+		tree.append_column(column0)
+		tree.append_column(column1)
+		tree.append_column(column2)
+		tree.append_column(column3)
+		scrolled_window = Gtk.ScrolledWindow(expand=True)
+		scrolled_window.add(tree)
+		
+		ShowDialog.ShowDialog(parent, total_min, scrolled_window).run()
