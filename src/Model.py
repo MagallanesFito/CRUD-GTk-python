@@ -121,3 +121,9 @@ class Model:
 				total_min = total_min + b
 		self.showResume(parent, total_min)
 		return entries_shown
+	def minutesToHours(self,minutes):
+		horas = minutes//60
+		minutos = minutes%60
+		return [horas,minutos]
+	def hoursToMinutes(self,hours,minutes):
+		return (hours*60 + minutes)
