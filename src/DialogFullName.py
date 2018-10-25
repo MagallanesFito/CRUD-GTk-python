@@ -20,9 +20,16 @@ class DialogFullName:
 		dat.set_text("DD/MM/YYYY")
 		dat.connect('changed', self._entry_changed)
 		self.dat = dat
-		tp = Gtk.Entry(activates_default=True)
+		self.tp_text = ""
+		'''tp = Gtk.Entry(activates_default=True)
 		tp.connect('changed', self._entry_changed)
-		tp.set_placeholder_text('Type of exercise')
+		tp.set_placeholder_text('Type of exercise')'''
+		tp = Gtk.ComboBoxText()
+		categories = ["Karate","Kick Boxing","Gym","Fitness","Swimming","Dancing"]
+		tp.set_entry_text_column(0)
+		tp.connect("changed", self.on_tp_changed)
+		for category in categories:
+			tp.append_text(category)
 		self.tp = tp
 		dur = Gtk.Entry(activates_default=True)
 		dur.connect('changed', self._entry_changed)
@@ -35,7 +42,8 @@ class DialogFullName:
 
 		if data is not None:
 			dat.set_text(data[0])
-			tp.set_text(data[1])
+			#tp.set_text(data[1])
+			tp.set_active(categories.index(data[1]))
 			dur.set_text(str(data[2]))
 			cm.set_text(data[3])
 		lbl_dat = Gtk.Label("Date")
@@ -63,26 +71,36 @@ class DialogFullName:
 
 		''' Validacion con el modelo ''' 
 		if response == Gtk.ResponseType.OK:
-			result = (self.dat.get_text().strip(), self.tp.get_text().strip(), int(self.dur.get_text().strip()), self.cm.get_text().strip())
+			result = (self.dat.get_text().strip(), self.tp_text, int(self.dur.get_text().strip()), self.cm.get_text().strip())
 		else:
 			result = None
 		self.dialog.destroy()
 		return result
 
 	def _entry_changed(self, entry):
-		valid_duration = Model.Model().isValidDuration(self.dur.get_text().strip())
-		valid_date = Model.Model().isValidDate(self.dat.get_text().strip())
+		self.valid_duration = Model.Model().isValidDuration(self.dur.get_text().strip())
+		self.valid_date = Model.Model().isValidDate(self.dat.get_text().strip())
+		#selected_category = (self.tp_text!= "")
 
-		isFilled = (valid_duration) and (valid_date) and (self.dat.get_text().strip() != "") and (self.tp.get_text().strip() != "") and (self.dur.get_text().strip() != "") and (self.cm.get_text().strip() != "")
-		if not valid_date:
+		isFilled = (self.valid_duration) and (self.valid_date) and (self.dat.get_text().strip() != "") and (self.tp_text != "") and (self.dur.get_text().strip() != "") and (self.cm.get_text().strip() != "")
+		if not self.valid_date:
 			self.dat.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(1.0, 0.0, 0.0, 1.0))
 		else:
 			self.dat.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0.0, 0.0, 0.0, 1.0))
 
-		if not valid_duration:
+		if not self.valid_duration:
 			self.dur.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(1.0, 0.0, 0.0, 1.0))
 		else:
 			self.dur.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0.0, 0.0, 0.0, 1.0))
+		#if not selected_category:
+		#	self.tp.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(1.0, 0.0, 0.0, 1.0))
+		#else:
+		#	self.tp.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0.0, 0.0, 0.0, 1.0))
 		
 		self.dialog.set_response_sensitive(Gtk.ResponseType.OK, isFilled)
-
+	def on_tp_changed(self,combo):
+		text = combo.get_active_text()
+		if text is not None:
+			self.tp_text = text
+		isFilled = (self.valid_duration) and (self.valid_date) and (self.dat.get_text().strip() != "") and (self.tp_text != "") and (self.dur.get_text().strip() != "") and (self.cm.get_text().strip() != "")
+		self.dialog.set_response_sensitive(Gtk.ResponseType.OK, isFilled)

@@ -7,7 +7,7 @@ from gi.repository import Gtk, Atk
 class Mock:
 	def __init__(self):
 		#entradas dummy
-		self.list = [["14/09/2019","Karate",60,"Agressive!"],["13/10/2018","Tae Kwon Do",120,"Nice"]]
+		self.list = [["14/09/2019","Karate",60,"Agressive!"],["13/10/2018","Kick Boxing",120,"Nice"]]
 	def addEntry(self, e):
 		self.list.append(list(e))
 	def deleteEntry(self,entry):
