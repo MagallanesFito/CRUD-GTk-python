@@ -105,13 +105,11 @@ class Model:
 			return
 		return entry
 
-	def showResume(self, parent, minutes):
-		ShowDialog.ShowDialog(parent, minutes).run()
-	
 	def monthResume(self, parent, month, year):
 		entries = self.getAllEntries()
 		entries_shown = []
 		total_min = 0
+		month_list = Gtk.ListStore(str, str, int, str)
 		for entry in entries: # detecta las actividades en el mes seleccionado
 			(date, a, b, c) = entry
 			adate = datetime.datetime.strptime(date,'%d/%m/%Y')
