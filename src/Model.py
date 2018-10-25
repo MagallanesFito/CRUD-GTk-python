@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import gi
-import Mock
+#import Mock
+import ServerConnect
 import DialogFullName as generic_dialog
 import ShowDialog
 import datetime
@@ -13,7 +14,7 @@ from gi.repository import Gtk, Atk
 
 class Model:
 	def __init__(self):
-		self.mock = Mock.Mock()
+		self.mock = ServerConnect.ServerConnect()
 	def addEntry(self, w):
 		entry = generic_dialog.DialogFullName(w,"Add Entry",None).run()
 		''' Por lo pronto solo se hace la validacion de la fecha''' 
@@ -110,6 +111,8 @@ class Model:
 		entries_shown = []
 		total_min = 0
 		month_list = Gtk.ListStore(str, str, int, str)
+		if entries==None:
+			return
 		for entry in entries: # detecta las actividades en el mes seleccionado
 			(date, a, b, c) = entry
 			adate = datetime.datetime.strptime(date,'%d/%m/%Y')

@@ -66,6 +66,8 @@ class Controller:
 			self.isFiltered = True
 		self.view.prefix.set_text("")
 		self.view.viewer.clear()
+		if entries == None:
+			return
 		for entry in entries:
 			self.view.viewer.append(entry)
 		print("show all entries selected")
