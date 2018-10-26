@@ -16,5 +16,5 @@ You can CReate, Update or Delete an activity.
 * Follows the HIG guidelines from here https://developer.gnome.org/hig/stable/
 
 #Documentation
-* UML,Wireframes and Priority guides in ´´´ src ´´´ folder
-* Source Code in ´´´src ´´´ folder 
+* UML,Wireframes and Priority guides in '''doc''' folder
+* Source Code in '''src''' folder 
