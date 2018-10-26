@@ -27,14 +27,13 @@ class ServerConnect:
 	def getId(self, entry):
 		for e in self.hash:
 			(myid,ent) = e
-			print(myid)
 			if ent==entry:
 				return myid
 		return
 	
 	def updateId(self, myid, bef, entry):
 		ind = self.hash.index((myid,bef))
-		self.hash.remove(ind)
+		self.hash.remove((myid,bef))
 		self.hash.insert(ind, (myid,entry))
 		
 	def deleteEntry(self,entry):
@@ -47,16 +46,13 @@ class ServerConnect:
 	def modifyEntry(self, befentry, aftentry):
 		myid = self.getId(befentry)
 		url = 'http://127.0.0.1:5000/worktime/' + str(myid)
-		print(myid)
 		(dat,ty,dur,com) = aftentry
-		url = 'http://127.0.0.1:5000/worktime'
 		(day,month,year) = dat.split('/')
 		data = year+'-'+month+'-'+day+'T'+self.minutesToHours(dur) 
 		dict_data = {"startDate": data, "endDate" : data,"category" : ty, "description" : com}
 		dict_data = json.dumps(dict_data)
 		loaded_r = json.loads(dict_data)
 		r = requests.put(url, data=loaded_r)
-		print(r.status_code)
 		if r.status_code == 200:
 			self.updateId(myid,befentry,aftentry)
 			return
