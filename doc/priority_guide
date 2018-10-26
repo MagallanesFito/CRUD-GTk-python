@@ -1,0 +1,74 @@
+Main screen
+---------------------
+|                   |
+|       List        |
+|  [Data, type,     |
+| duration, comment]|
+---------------------
+|                   |
+|      Add          | - Button
+|                   |
+---------------------
+|                   |
+|      Remove       | - Button
+|                   |
+---------------------
+|                   |
+|      Modify       | - Button
+|                   |
+---------------------
+Main screen buttons launch dialogs with identical names.
+
+Add dialog
+---------------------
+|                   |
+|       Form        |
+|                   |
+|  * Date           |
+|  * Type           |
+|  * Duration       |
+|  * Comment        |
+|                   |
+---------------------
+|                   |
+|      Add          | - Button
+|                   |
+---------------------
+|                   |
+|      Cancel       | - Button
+|                   |
+---------------------
+
+
+Remove dialog
+
+---------------------
+|                   |
+|      No           | - Button
+|                   |
+---------------------
+|                   |
+|      Yes          | - Button
+|                   |
+---------------------
+
+
+Modify dialog
+---------------------
+|                   |
+|       Form        |
+|                   |
+|  * Date           |
+|  * Type           |
+|  * Duration       |
+|  * Comment        |
+|                   |
+---------------------
+|                   |
+|      Modify       | - Button
+|                   |
+---------------------
+|                   |
+|      Cancel       | - Button
+|                   |
+---------------------
