@@ -20,7 +20,8 @@ class Model:
 		''' Por lo pronto solo se hace la validacion de la fecha''' 
 		if entry is not None:
 			if(self.isValidDate(entry[0])):
-				self.mock.addEntry(list(entry))
+				if self.mock.addEntry(list(entry)) != None:
+					return None
 				return list(entry)
 		return None
 	def getAllEntries(self):
@@ -70,7 +71,8 @@ class Model:
 		entry = dialog.run()
 		if entry is not None:
 			if(self.isValidDate(entry[0])):
-				self.mock.modifyEntry(selected_entry, list(entry))
+				if self.mock.modifyEntry(selected_entry, list(entry)) != None:
+					return None
 				return entry
 		return None
 		
@@ -87,15 +89,19 @@ class Model:
 		dialog = delete_dialog.ConfirmationDialog(main_view)
 		response = dialog.run()
 		if response == Gtk.ResponseType.OK:
-			self.mock.deleteEntry(selected_entry)
-			#main_view.viewer.remove(tree_iter)
-			model, filteriter = tree_selection.get_selected()
-			treeiter = model.convert_iter_to_child_iter(filteriter)
-			model.get_model().remove(treeiter)
-			print("Deleted!")
+			if self.mock.deleteEntry(selected_entry) == None:
+				#main_view.viewer.remove(tree_iter)
+				model, filteriter = tree_selection.get_selected()
+				treeiter = model.convert_iter_to_child_iter(filteriter)
+				model.get_model().remove(treeiter)
+				print("Deleted!")
+			else:
+				print("Connection problems")
+				return -1
 		elif response == Gtk.ResponseType.CANCEL:
 			print("Deletion aborted")
 		dialog.destroy()
+		return
 	def showCalendar(self,view):
 		calendario = calendar.CalendarDialog(view,self.mock.get_all())
 		a = calendario.run()
@@ -119,5 +125,5 @@ class Model:
 			if adate.month ==month and adate.year==year:
 				entries_shown.append([date,a,b,c])
 				total_min = total_min + b
-		self.showResume(parent, total_min)
+		#self.showResume(parent, total_min)
 		return entries_shown
