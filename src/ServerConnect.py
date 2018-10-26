@@ -34,7 +34,7 @@ class ServerConnect:
 	def updateId(self, myid, bef, entry):
 		ind = self.hash.index((myid,bef))
 		self.hash.remove((myid,bef))
-		self.hash.insert(ind, (myid,entry))
+		self.hash.insert((myid,entry))
 		
 	def deleteEntry(self,entry):
 		url = 'http://127.0.0.1:5000/worktime/' + str(self.getId(entry))
