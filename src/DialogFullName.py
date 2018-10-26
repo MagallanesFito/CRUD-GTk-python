@@ -12,6 +12,8 @@ class DialogFullName:
 		dialog.set_default_response(Gtk.ResponseType.OK)
 		dialog.set_response_sensitive(Gtk.ResponseType.OK, False)
 		self.dialog = dialog
+		self.valid_duration = False
+		self.valid_date = False
 		box = dialog.get_content_area()
 		grid = Gtk.Grid(margin=18, column_spacing=12, row_spacing=12)
 
