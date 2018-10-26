@@ -39,16 +39,13 @@ class ServerConnect:
 	def getId(self, entry):
 		for e in self.hash:
 			(myid,ent) = e
-			print(myid)
 			if ent==entry:
 				return myid
 		return
 	
 	def updateId(self, myid, bef, entry):
 		ind = self.hash.index((myid,bef))
-		self.hash[ind] = (myid,entry)
-		'''self.hash.remove((myid,bef))
-		self.hash.append((myid,entry))'''
+		self.hash[ind] = (myid, entry)
 		
 	def deleteEntry(self,entry):
 		url = 'http://127.0.0.1:5000/worktime/' + str(self.getId(entry))
@@ -60,9 +57,7 @@ class ServerConnect:
 	def modifyEntry(self, befentry, aftentry,window):
 		myid = self.getId(befentry)
 		url = 'http://127.0.0.1:5000/worktime/' + str(myid)
-		print(myid)
 		(dat,ty,dur,com) = aftentry
-		#url = 'http://127.0.0.1:5000/worktime'
 		(day,month,year) = dat.split('/')
 		data = year+'-'+month+'-'+day+'T'+self.minutesToHours(dur) 
 		dict_data = {"startDate": data, "endDate" : data,"category" : ty, "description" : com}
