@@ -46,8 +46,9 @@ class ServerConnect:
 	
 	def updateId(self, myid, bef, entry):
 		ind = self.hash.index((myid,bef))
-		self.hash.remove((myid,bef))
-		self.hash.append((myid,entry))
+		self.hash[ind] = (myid,entry)
+		'''self.hash.remove((myid,bef))
+		self.hash.append((myid,entry))'''
 		
 	def deleteEntry(self,entry):
 		url = 'http://127.0.0.1:5000/worktime/' + str(self.getId(entry))
@@ -67,8 +68,11 @@ class ServerConnect:
 		dict_data = {"startDate": data, "endDate" : data,"category" : ty, "description" : com}
 		dict_data = json.dumps(dict_data)
 		loaded_r = json.loads(dict_data)
-		r = requests.put(url, data=loaded_r)
-		print(r.status_code)
+		try:
+			r = requests.put(url, data=loaded_r)
+		except ConnectionError as e:
+			response_dia.ResponseDialog(window,"Connection Error: Entry Could not be modified").run()
+			return -1
 		if r.status_code == 200:
 			self.updateId(myid,befentry,aftentry)
 			response_dia.ResponseDialog(window,"Successfully Modified!").run()
