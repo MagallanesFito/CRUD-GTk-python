@@ -20,7 +20,7 @@ class Model:
 		''' Por lo pronto solo se hace la validacion de la fecha''' 
 		if entry is not None:
 			if(self.isValidDate(entry[0])):
-				if self.mock.addEntry(list(entry)) != None:
+				if self.mock.addEntry(list(entry),w) != None:
 					return None
 				return list(entry)
 		return None
@@ -71,7 +71,7 @@ class Model:
 		entry = dialog.run()
 		if entry is not None:
 			if(self.isValidDate(entry[0])):
-				if self.mock.modifyEntry(selected_entry, list(entry)) != None:
+				if self.mock.modifyEntry(selected_entry, list(entry),w) != None:
 					return None
 				return entry
 		return None
