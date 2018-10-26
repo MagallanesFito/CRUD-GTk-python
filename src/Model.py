@@ -109,6 +109,7 @@ class Model:
 		ShowDialog.ShowDialog(parent, minutes).run()
 	def monthResume(self, parent, month, year):
 		entries = self.getAllEntries()
+		print(entries)
 		entries_shown = []
 		total_min = 0
 		month_list = Gtk.ListStore(str, str, int, str)
@@ -122,12 +123,3 @@ class Model:
 				total_min = total_min + b
 		self.showResume(parent, total_min)
 		return entries_shown
-	def minutesToHours(self,minutes):
-		horas = minutes//60
-		minutos = minutes%60
-		return [horas,minutos]
-	def hoursToMinutes(self,hour_string):
-		(hours,minutes) = hour_string.split(":")
-		hours = int(hours)
-		minutes = int(minutes)
-		return (hours*60 + minutes)
