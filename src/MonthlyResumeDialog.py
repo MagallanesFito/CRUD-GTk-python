@@ -5,9 +5,13 @@ import Model
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Atk, Gdk
 
+import gettext 
+
+t = gettext.translation('month_resume_domain','locale',fallback=True)
+_ = t.gettext
 class MonthlyResumeDialog:
 	def __init__(self, parent):
-		dialog = Gtk.Dialog("Monthly Resume", parent, Gtk.DialogFlags.DESTROY_WITH_PARENT, (Gtk.STOCK_OK, Gtk.ResponseType.OK,Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, ))
+		dialog = Gtk.Dialog(_("Monthly Resume"), parent, Gtk.DialogFlags.DESTROY_WITH_PARENT, (Gtk.STOCK_OK, Gtk.ResponseType.OK,Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, ))
 		dialog.set_default_response(Gtk.ResponseType.OK)
 		dialog.set_response_sensitive(Gtk.ResponseType.OK, False)
 		self.dialog = dialog
@@ -22,9 +26,9 @@ class MonthlyResumeDialog:
 		year.connect('changed', self._entry_changed)
 		year.set_placeholder_text('YYYY')
 		self.year = year
-		lbl_month = Gtk.Label("Month")
+		lbl_month = Gtk.Label(_("Month"))
 		month.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_month.get_accessible())
-		lbl_year = Gtk.Label("Year")
+		lbl_year = Gtk.Label(_("Year"))
 		year.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_year.get_accessible())
 		
 		grid.attach(lbl_month, 0, 0, 1, 1)

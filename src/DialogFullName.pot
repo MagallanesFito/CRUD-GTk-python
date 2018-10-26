@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid   ""
+msgstr  "Project-Id-Version: PACKAGE VERSION\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2018-10-26 17:31+0200\n"
+        "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+        "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+        "Language-Team: LANGUAGE <LL@li.org>\n"
+        "Language: \n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=CHARSET\n"
+        "Content-Transfer-Encoding: 8bit\n"
+
+#: DialogFullName.py:35
+msgid   "Karate"
+msgstr  ""
+
+#: DialogFullName.py:35
+msgid   "Kick Boxing"
+msgstr  ""
+
+#: DialogFullName.py:35
+msgid   "Gym"
+msgstr  ""
+
+#: DialogFullName.py:35
+msgid   "Fitness"
+msgstr  ""
+
+#: DialogFullName.py:35
+msgid   "Swimming"
+msgstr  ""
+
+#: DialogFullName.py:35
+msgid   "Dancing"
+msgstr  ""
+
+#: DialogFullName.py:43
+msgid   "Only numeric values"
+msgstr  ""
+
+#: DialogFullName.py:47
+msgid   "Write a short description :)"
+msgstr  ""
+
+#: DialogFullName.py:56
+msgid   "Date"
+msgstr  ""
+
+#: DialogFullName.py:58
+msgid   "Type"
+msgstr  ""
+
+#: DialogFullName.py:60
+msgid   "Duration (minutes)"
+msgstr  ""
+
+#: DialogFullName.py:62
+msgid   "Comment"
+msgstr  ""

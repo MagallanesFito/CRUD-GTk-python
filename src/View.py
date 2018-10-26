@@ -4,12 +4,15 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk,Atk
+import gettext 
 
+t = gettext.translation('main_view_domain','locale',fallback=True)
+_ = t.gettext
 class View(Gtk.Window):
 	def __init__(self):
 		prefix = Gtk.Entry()
 		self.prefix = prefix
-		lbl_prefix = Gtk.Label(label="_Filtrar:", use_underline=True, mnemonic_widget=self.prefix)
+		lbl_prefix = Gtk.Label(label=_("_Filtrar:"), use_underline=True, mnemonic_widget=self.prefix)
 		prefix.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_prefix.get_accessible())
 		Gtk.Window.__init__(self,title="Fitness App")
 		self.set_default_size(680,680)
@@ -18,9 +21,9 @@ class View(Gtk.Window):
 		self.viewer = Gtk.ListStore(str, str, int, str)
 		grid = Gtk.Grid(margin=18)
 		self.add(grid)
-		self.add = Gtk.Button(label="_Add", use_underline=True)
-		self.remove = Gtk.Button(label="_Remove", use_underline=True)
-		self.modify = Gtk.Button(label="_Edit", use_underline=True)
+		self.add = Gtk.Button(label=_("_Add"), use_underline=True)
+		self.remove = Gtk.Button(label=_("_Remove"), use_underline=True)
+		self.modify = Gtk.Button(label=_("_Edit"), use_underline=True)
 
 		filter = self.viewer.filter_new()
 		filter.set_visible_func(self._entries_visible_func)
@@ -29,16 +32,16 @@ class View(Gtk.Window):
 		self.entries = Gtk.TreeView(filter, headers_visible=True)
 
 		renderer0 = Gtk.CellRendererText()
-		column0 = Gtk.TreeViewColumn("Date", renderer0, text=0)
+		column0 = Gtk.TreeViewColumn(_("Date"), renderer0, text=0)
 		column0.set_alignment(0.5)
 		renderer1 = Gtk.CellRendererText()
-		column1 = Gtk.TreeViewColumn("Type", renderer1, text=1)
+		column1 = Gtk.TreeViewColumn(_("Type"), renderer1, text=1)
 		column1.set_alignment(0.5)
 		renderer2 = Gtk.CellRendererText()
-		column2 = Gtk.TreeViewColumn("Duration (minutes)", renderer2, text=2)
+		column2 = Gtk.TreeViewColumn(_("Duration (minutes)"), renderer2, text=2)
 		column2.set_alignment(0.5)
 		renderer3 = Gtk.CellRendererText()
-		column3 = Gtk.TreeViewColumn("Comment", renderer3, text=3)
+		column3 = Gtk.TreeViewColumn(_("Comment"), renderer3, text=3)
 		column3.set_alignment(0.5)
 
 		self.entries.append_column(column0)
@@ -56,15 +59,15 @@ class View(Gtk.Window):
 		bottomBox.pack_start(boxButtons,False,False,0)
 		bottomBox.pack_start(filterButtons,False,False,0)
 
-		self.show_all_entries = Gtk.Button("Show all entries")
-		self.month_resume  = Gtk.Button("Monthly resume")
-		self.prefix.set_placeholder_text("DD/MM/YYYY")
+		self.show_all_entries = Gtk.Button(_("Show all entries"))
+		self.month_resume  = Gtk.Button(_("Monthly resume"))
+		self.prefix.set_placeholder_text(_("DD/MM/YYYY"))
 		boxButtons.pack_start(self.add, False, False, 0)
 		boxButtons.pack_start(self.modify, False, False, 0)
 		boxButtons.pack_start(self.remove, False, False, 0)
 		boxButtons.pack_start(self.month_resume, False, False, 0)
 		boxButtons.pack_start(self.show_all_entries,False,False,0)
-		boxButtons.pack_start(Gtk.Label("Filter by day: "), False, False, 0)
+		boxButtons.pack_start(Gtk.Label(_("Filter by day: ")), False, False, 0)
 		boxButtons.pack_start(self.prefix, False, False, 0)
 
 		grid.attach(scrolled_window, 0, 1, 1, 1)

@@ -6,6 +6,11 @@ import Model
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Atk, Gdk
 
+import gettext 
+
+t = gettext.translation('dialog_fullname_domain','locale',fallback=True)
+_ = t.gettext
+
 class DialogFullName:
 	def __init__(self, parent, title, data=None):
 		dialog = Gtk.Dialog(title, parent, Gtk.DialogFlags.DESTROY_WITH_PARENT, (Gtk.STOCK_OK, Gtk.ResponseType.OK,Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, ))
@@ -27,7 +32,7 @@ class DialogFullName:
 		tp.connect('changed', self._entry_changed)
 		tp.set_placeholder_text('Type of exercise')'''
 		tp = Gtk.ComboBoxText()
-		categories = ["Karate","Kick Boxing","Gym","Fitness","Swimming","Dancing"]
+		categories = [_("Karate"),_("Kick Boxing"),_("Gym"),_("Fitness"),_("Swimming"),_("Dancing")]
 		tp.set_entry_text_column(0)
 		tp.connect("changed", self.on_tp_changed)
 		for category in categories:
@@ -35,11 +40,11 @@ class DialogFullName:
 		self.tp = tp
 		dur = Gtk.Entry(activates_default=True)
 		dur.connect('changed', self._entry_changed)
-		dur.set_placeholder_text('Only numeric values')
+		dur.set_placeholder_text(_('Only numeric values'))
 		self.dur = dur
 		cm = Gtk.Entry(activates_default=True)
 		cm.connect('changed', self._entry_changed)
-		cm.set_placeholder_text('Write a short description :)')
+		cm.set_placeholder_text(_('Write a short description :)'))
 		self.cm = cm
 
 		if data is not None:
@@ -48,13 +53,13 @@ class DialogFullName:
 			tp.set_active(categories.index(data[1]))
 			dur.set_text(str(data[2]))
 			cm.set_text(data[3])
-		lbl_dat = Gtk.Label("Date")
+		lbl_dat = Gtk.Label(_("Date"))
 		dat.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_dat.get_accessible())
-		lbl_tp = Gtk.Label("Type")
+		lbl_tp = Gtk.Label(_("Type"))
 		tp.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_tp.get_accessible())
-		lbl_dur = Gtk.Label("Duration (minutes)")
+		lbl_dur = Gtk.Label(_("Duration (minutes)"))
 		dur.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_dur.get_accessible())
-		lbl_cm = Gtk.Label("Comment")
+		lbl_cm = Gtk.Label(_("Comment"))
 		cm.get_accessible().add_relationship(Atk.RelationType.LABELLED_BY, lbl_cm.get_accessible())
 
 		grid.attach(lbl_dat, 0, 0, 1, 1)

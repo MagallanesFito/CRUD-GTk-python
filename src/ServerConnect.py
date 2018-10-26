@@ -7,6 +7,10 @@ from requests.exceptions import ConnectionError
 import ResponseDialog as response_dia
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Atk
+import gettext 
+
+t = gettext.translation('response_domain','locale',fallback=True)
+_ = t.gettext
 
 class ServerConnect:
 	
@@ -22,18 +26,18 @@ class ServerConnect:
 			r = requests.post(url, data=loaded_r)
 			myid = r.json()['id']
 		except ConnectionError as e:
-			response_dia.ResponseDialog(window,"Connection Error: Entry Could not be inserted").run()
+			response_dia.ResponseDialog(window,_("Connection Error: Entry Could not be inserted")).run()
 			return -1
 		if r.status_code == 200:
 			e = (myid, entry)
 			self.hash.append(e)
-			response_dia.ResponseDialog(window,"Successfully inserted!").run()
+			response_dia.ResponseDialog(window,_("Successfully inserted!")).run()
 			return
 		if r.status_code == 400:
-			response_dia.ResponseDialog(window,"Incorrect params").run()
+			response_dia.ResponseDialog(window,_("Incorrect params")).run()
 			return 
 		if r.status_code == 500:
-			response_dia.ResponseDialog(window,"Entry Could not be inserted").run()
+			response_dia.ResponseDialog(window,_("Entry Could not be inserted")).run()
 			return 
 	
 	def getId(self, entry):
@@ -71,20 +75,20 @@ class ServerConnect:
 		try:
 			r = requests.put(url, data=loaded_r)
 		except ConnectionError as e:
-			response_dia.ResponseDialog(window,"Connection Error: Entry Could not be modified").run()
+			response_dia.ResponseDialog(window,_("Connection Error: Entry Could not be modified")).run()
 			return -1
 		if r.status_code == 200:
 			self.updateId(myid,befentry,aftentry)
-			response_dia.ResponseDialog(window,"Successfully Modified!").run()
+			response_dia.ResponseDialog(window,_("Successfully Modified!")).run()
 			return
 		if r.status_code == 400:
-			response_dia.ResponseDialog(window,"Incorrect parameters").run()
+			response_dia.ResponseDialog(window,_("Incorrect parameters")).run()
 			return
 		if r.status_code == 404:
-			response_dia.ResponseDialog(window,"Entry not found").run()
+			response_dia.ResponseDialog(window,_("Entry not found")).run()
 			return
 		if r.status_code == 500:
-			response_dia.ResponseDialog(window,"Could not be updated").run()
+			response_dia.ResponseDialog(window,_("Could not be updated")).run()
 			return
 		return -1 
 		

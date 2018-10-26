@@ -3,6 +3,10 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+import gettext 
+
+t = gettext.translation('confirmation_dialog_domain','locale',fallback=True)
+_ = t.gettext
 
 class ConfirmationDialog(Gtk.Dialog):
 
@@ -12,7 +16,7 @@ class ConfirmationDialog(Gtk.Dialog):
 
         self.set_default_size(150, 100)
 
-        label = Gtk.Label("Are you sure you want to delete this entry?",margin=18)
+        label = Gtk.Label(_("Are you sure you want to delete this entry?"),margin=18)
 
         box = self.get_content_area()
         box.add(label)
