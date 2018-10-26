@@ -40,8 +40,8 @@ class Model:
 	def isValidDuration(self,number):
 		if number.isnumeric():
 			integer_number = int(number)
-			#No puede entrenar menos de 0 minutos ni mas de 100 horas
-			return integer_number > 0 and integer_number < 6000
+			#No puede entrenar menos de 0 minutos ni mas de 23:59 hrs
+			return integer_number > 0 and integer_number < 1439
 		return False
 		
 	def isValidMonth(self,month):
