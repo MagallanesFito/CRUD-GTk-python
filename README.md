@@ -15,6 +15,6 @@ You can CReate, Update or Delete an activity.
 	* Galician
 * Follows the HIG guidelines from here https://developer.gnome.org/hig/stable/
 
-#Documentation
+# Documentation
 * UML,Wireframes and Priority guides in '''doc''' folder
 * Source Code in '''src''' folder 
